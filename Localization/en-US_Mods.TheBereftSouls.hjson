@@ -1,17 +1,6 @@
-Mods: {
-	TheBereftSouls: {
-		Items: {
-			StandardBlood: {
-				DisplayName: Blood
-				Tooltip: Functions as Calamity Blood Orbs and Thorium Blood.
-			}
-		}
-	}
-}
-
 Items: {
 	StandardBlood: {
-		Tooltip: ""
-		DisplayName: Standard Blood
+		Tooltip: Functions as Calamity Blood Orbs and Thorium Blood.
+		DisplayName: Blood Droplet
 	}
 }
