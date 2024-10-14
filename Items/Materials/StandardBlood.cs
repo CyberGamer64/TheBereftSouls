@@ -1,10 +1,9 @@
-//using ExampleMod.Content.Items.Placeable;
-//using ExampleMod.Content.Items.Placeable.Furniture;
 using Terraria;
 using Terraria.GameContent.Creative;
 using Terraria.ID;
 using Terraria.ModLoader;
 using Microsoft.Xna.Framework;
+using Terraria.DataStructures;
 
 namespace TheBereftSouls.Items.Materials
 {
@@ -12,6 +11,7 @@ namespace TheBereftSouls.Items.Materials
 	{
 		public override void SetStaticDefaults() {
 			Item.ResearchUnlockCount = 100;
+			Main.RegisterItemAnimation(Type, new DrawAnimationVertical(9,7));
 		}
 
 		public override void SetDefaults() {
