@@ -35,7 +35,11 @@ namespace TheBereftSouls.Common.Global
 						recipe.AddIngredient<Items.Materials.StandardBlood>(ingredientAmount);
 					}
 				}
-			}
+				// Add Recipes in case of mod being enabled later.
+                Recipe bloodRecipe = Recipe.Create(ModContent.ItemType<Items.Materials.StandardBlood>(), 1);
+                bloodRecipe.AddIngredient(CalamityMod.Find<ModItem>("BloodOrb"));
+                bloodRecipe.Register();
+            }
 			// Checks to see if Thorium is installed before making changes.
 			if (ModLoader.TryGetMod("ThoriumMod", out Mod ThoriumMod))
 			{
@@ -49,19 +53,19 @@ namespace TheBereftSouls.Common.Global
 						recipe.AddIngredient<Items.Materials.StandardBlood>(ingredientAmount);
 					}
 				}
+				// Add Recipes in case of mod being enabled later.
+				// Thorium Blood is also placeable so allow reconversion.
+                var resultItem = ThoriumMod.Find<ModItem>("Blood");
+                resultItem.CreateRecipe()
 
-			}
-		}
-		// Thorium Blood is a decorative block so create a recipe to convert standard blood back into Thorium blood.
-		public override void AddRecipes()
-		{
-			if (ModLoader.TryGetMod("ThoriumMod", out Mod ThoriumMod))
-			{
-				Recipe.Create(ThoriumMod.Find<ModItem>("Blood"))
-				{
-					.AddIngredient<Items.Materials.StandardBlood>(3);
-				}
-			}
+                    .AddIngredient<Items.Materials.StandardBlood>(5)
+
+                    .Register();
+                // Convert Thorium Blood to Standard.
+                Recipe bloodRecipe = Recipe.Create(ModContent.ItemType<Items.Materials.StandardBlood>(), 1);
+                bloodRecipe.AddIngredient(ThoriumMod.Find<ModItem>("Blood"));
+                bloodRecipe.Register();
+            }
 		}
 	}
 }
